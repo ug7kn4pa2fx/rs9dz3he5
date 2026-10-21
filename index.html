@@ -231,7 +231,8 @@ html,body{margin:0;background:#f2f1ea;color:var(--color-fg);font-family:var(--fo
 #card-ice .ar-chart, #card-hyb .ar-chart { min-height: 200px; }
 
 /* phone landscape: compact top tray, icon left of label, Chinese only */
-@media (orientation: landscape) and (max-height: 520px) {
+@media (max-width: 760px) { .ar-brand { width: auto; margin: 0 8px 0 0; text-align: left; flex: none; } .ar-brand .zh { font-size: 12px; } }
+@media (max-width: 760px), (max-height: 600px), (pointer: coarse) and (max-width: 1180px) {
   .ar { grid-template-columns: minmax(0, 1fr); }
   .ar-side { position: sticky; top: 0; z-index: 10; height: auto; flex-direction: row; align-items: center; gap: 6px; padding: 6px 12px; background: var(--a-bg); overflow-x: auto; scrollbar-width: none; }
   .ar-brand { width: auto; margin: 0 8px 0 0; white-space: nowrap; text-align: left; }
@@ -248,7 +249,74 @@ html,body{margin:0;background:#f2f1ea;color:var(--color-fg);font-family:var(--fo
   .ar-top { margin-bottom: 10px; }
   .ar-top h1 { font-size: 22px; }
 }
-@media (max-width: 760px) { .ar-brand { width: auto; margin: 0 8px 0 0; text-align: left; flex: none; } .ar-brand .zh { font-size: 12px; } }
+
+
+/* compact header on phones */
+@media (max-width: 760px), (max-height: 600px), (pointer: coarse) and (max-width: 1180px) {
+  .ar-top { flex-wrap: nowrap; gap: 10px; margin-bottom: 10px; align-items: center; }
+  .ar-top > div:first-child { min-width: 0; }
+  .ar-eyebrow { font-size: 10px; margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .ar-eyebrow .ru { display: none; }
+  .ar-top h1 { font-size: 20px; white-space: nowrap; }
+  .ar-top h1 .ru { display: none; }
+  .ar-top-r { flex-wrap: nowrap; gap: 6px; flex: none; }
+  .ar-pill { padding: 3px; }
+  .ar-pill button { padding: 6px 10px; }
+  .ar-pill button .ru { display: none; }
+  .ar-pill button .zh-i { font-size: 12px; margin: 0; }
+  .ar-iconbtn { width: 32px; height: 32px; }
+  .ar-iconbtn svg { width: 15px; height: 15px; }
+}
+@media (max-width: 480px) {
+  .ar-top { flex-wrap: wrap; }
+  .ar-top-r { width: 100%; justify-content: space-between; }
+}
+
+/* PI: always 2 rows x 3 diagrams (landscape / wide), equal cards */
+@media (min-width: 560px), (orientation: landscape) {
+  #parallel .ar-grid3 { grid-template-columns: repeat(3, minmax(0, 1fr)); grid-auto-rows: 1fr; }
+}
+#parallel .ar-grid3 .ar-card { display: flex; flex-direction: column; }
+#parallel .ar-grid3 .ar-pi-chart, #parallel .ar-grid3 .ar-chart { flex: 1 1 auto; max-height: 300px; overflow-y: auto; overflow-x: hidden; scrollbar-width: thin; margin-bottom: 8px; }
+#parallel .ar-grid3 .ar-more { margin-top: auto; }
+@media (max-width: 1000px) and (orientation: landscape), (min-width: 560px) and (max-width: 1000px) {
+  #parallel .ar-grid3 { gap: 10px; }
+  #parallel .ar-grid3 .ar-card { padding: 12px 12px; border-radius: 16px; }
+  #parallel .ar-grid3 .ar-card h3 { font-size: 12px; margin-bottom: 8px; }
+  #parallel .ar-grid3 .ar-card h3 .zh { font-size: 13px; }
+  #parallel .ar-grid3 .ar-card h3 .ru { display: none; }
+  #parallel .ar-grid3 .ar-prow { grid-template-columns: 20px minmax(0, 1fr) auto; gap: 2px 6px; }
+  #parallel .ar-grid3 .ar-prow .n { width: 20px; height: 20px; font-size: 9.5px; }
+  #parallel .ar-grid3 .ar-prow .l, #parallel .ar-grid3 .ar-prow .v { font-size: 11px; }
+  #parallel .ar-grid3 .ar-plist { gap: 7px; }
+  #parallel .ar-grid3 .ar-pi-chart, #parallel .ar-grid3 .ar-chart { max-height: 220px; }
+  #parallel .ar-grid3 .ar-ctrls select { font-size: 11px; padding: 6px 10px; }
+  #parallel .ar-grid3 .ar-legend { font-size: 10px; gap: 6px; }
+}
+
+/* compact KPI cards */
+.ar-kpis .ar-card { padding: 14px 16px; border-radius: 18px; }
+.ar-kpi { gap: 6px; }
+.ar-kpi-ic { width: 28px; height: 28px; }
+.ar-kpi-ic svg { width: 14px; height: 14px; }
+.ar-kpi-val { font-size: clamp(18px, 1.8vw, 24px); }
+.ar-gauge { height: 74px; margin-top: 0; }
+.ar-gauge-v { font-size: 18px; bottom: 0; }
+.ar-kpis .ar-badge { padding: 3px 8px; font-size: 11px; }
+.ar-kpi > .ar-reg { margin-top: 2px; }
+
+.ar-kpis { grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr)); gap: 12px; }
+.ar-gauge-v { left: 0; right: auto; text-align: center; }
+.ar-kpi > .ar-reg { position: absolute; right: 10px; top: 10px; margin: 0; font-size: 0; gap: 0; padding: 3px 8px; }
+.ar-kpi > .ar-reg b { font-size: 10.5px; }
+.ar-kpi[data-reg] .ar-kpi-top { padding-right: 46px; }
+.ar-kpi-label .ru { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block; }
+.ar-kpi-top > div, .ar-kpi-label { min-width: 0; flex: 1 1 auto; }
+@media (max-width: 1000px) and (orientation: landscape), (max-width: 760px) {
+  .ar-kpi-ic { display: none; }
+  .ar-kpis .ar-card { padding: 10px 12px; }
+  .ar-kpi-label .zh { font-size: 12.5px; }
+}
 </style></head>
 <body><div id="dash-root">
 
@@ -870,16 +938,16 @@ window.dash=(function(){
   // semicircle gauge
   function gauge(el, share) {
     el.replaceChildren();
-    const W = Math.max(160, el.clientWidth || 200), H = 112, r = Math.min(W / 2 - 10, 92), cx = W / 2, cy = H - 8;
+    const W = Math.max(120, el.clientWidth || 160), H = 74, r = Math.min(W / 2 - 8, 64), cx = r + 6, cy = H - 4;
     const svg = d3.select(el).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`);
-    const arc = d3.arc().innerRadius(r - 16).outerRadius(r).cornerRadius(8).startAngle(-Math.PI / 2);
+    const arc = d3.arc().innerRadius(r - 11).outerRadius(r).cornerRadius(6).startAngle(-Math.PI / 2);
     const g = svg.append('g').attr('transform', `translate(${cx},${cy})`);
     g.append('path').attr('d', arc({endAngle: Math.PI / 2})).attr('fill', cssv('--a-soft'));
     const fg = g.append('path').attr('fill', cssv('--a-g700'));
     const end = -Math.PI / 2 + Math.PI * Math.max(0, Math.min(1, share));
     if (anim) fg.transition().duration(1100).ease(d3.easeCubicOut).attrTween('d', () => (t) => arc({endAngle: -Math.PI / 2 + (end + Math.PI / 2) * t}));
     else fg.attr('d', arc({endAngle: end}));
-    const v = document.createElement('div'); v.className = 'ar-gauge-v'; el.append(v);
+    const v = document.createElement('div'); v.className = 'ar-gauge-v'; v.style.width = (2 * r + 12) + 'px'; el.append(v);
     countUp(v, share * 100, (x) => x.toLocaleString('ru-RU', {maximumFractionDigits: 0}) + '%');
   }
 
